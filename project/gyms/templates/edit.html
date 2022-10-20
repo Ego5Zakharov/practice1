@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Gym</title>
+</head>
+<body>
+<h2>Изменение тренировки</h2>
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Введите название тренировки</label><br>
+        <input type="text" name="name" value="{{workout.name}}"/>
+    </p>
+    <p>
+        <label>Введите описание</label><br>
+        <input type="text" name="description" value="{{workout.description}}"/>
+    </p>
+
+    <p>
+        <label>Введите дату и время тренировки</label><br>
+        <input type="text" name="datetime" value="{{workout.datetime}}"/>
+    </p>
+
+    <p>
+        <label>Введите время</label><br>
+        <input type="text" name="time" value="{{workout.time}}"/>
+    </p>
+
+    <p>
+        <label>Введите цену за 1 тренировку</label><br>
+        <input type="number" name="priceForWorkout" value="{{workout.priceForWorkout}}"/>
+    </p>
+    <p>
+    <p>
+        <label>Выберите зал</label><br>
+        <select name="gym">
+            {% for gym in gyms %}
+            <option value="{{gym.id}}"
+                    {%if gym.id == workout.gym_id%}
+                    selected
+                    {%endif%}
+            >{{gym.name}}
+            </option>
+            {% endfor %}
+        </select>
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>

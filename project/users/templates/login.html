@@ -1,0 +1,17 @@
+{% if request.user.is_authenticated %}
+<h1>
+<a href="/gyms/">Наши спортивные филиалы</a>
+
+<h2><a href="/users/logout">Вы уже авторизированны. Выйти? </a></h2>
+</h1>
+
+{% else %}
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+{% endif %}
+
+

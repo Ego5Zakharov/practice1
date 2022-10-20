@@ -1,0 +1,86 @@
+{% if request.user.is_authenticated and user.is_staff == True %}
+<!--<h1>Money: {request.user.name}</h1>>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Gym</title>
+</head>
+<body>
+<h2>Create Workout</h2>
+<a href="create/">Добавление тренировки</a>
+<table>
+    <thead>
+    <th>name</th>
+    <th>description</th>
+    <th>datetime</th>
+    <th>time</th>
+    <th>priceForWorkout</th>
+    <th>GymName</th>
+    <th>GymAddress</th>
+    </thead>
+    {% for workout in workouts %}
+    <tr>
+        <td>{{ workout.name }}</td>
+        <td>{{ workout.description }}</td>
+        <td>{{ workout.datetime }}</td>
+        <td>{{ workout.time }}</td>
+        <td>{{ workout.priceForWorkout }}$</td>
+
+        <td>{{ workout.gym.name }}</td>
+        <td>{{ workout.gym.address }}</td>
+        <td>
+            <a href="edit/{{workout.id}}">Изменить</a> | <a href="delete/{{workout.id}}">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+
+
+{% elif request.user.is_authenticated and user.is_staff == False %}
+<h1></h1>
+<html>
+<head>
+    <title>Gym</title>
+</head>
+<body>
+<h2>Gym</h2>
+<!--<a href="create/">Добавление тренировки</a>-->
+<table>
+    <thead>
+    <th>name</th>
+    <th>description</th>
+    <th>datetime</th>
+    <th>time</th>
+    <th>priceForWorkout</th>
+    <th>GymName</th>
+    <th>GymAddress</th>
+    </thead>
+    {% for workout in workouts %}
+    <tr>
+        <td>{{ workout.name }}</td>
+        <td>{{ workout.description }}</td>
+        <td>{{ workout.datetime }}</td>
+        <td>{{ workout.time }}</td>
+        <td>{{ workout.priceForWorkout }}$</td>
+
+        <td>{{ workout.gym.name }}</td>
+        <td>{{ workout.gym.address }}</td>
+        <td>
+<!--            <a href="edit/{{workout.id}}">Изменить</a> | <a href="delete/{{workout.id}}">Удалить</a>-->
+            <a href="edit/{{workout.id}}">записаться</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+
+{% else %}
+<a href="/users/login">Вы не авторизированны,Войти?</a>
+{% endif %}
+
+

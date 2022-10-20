@@ -1,0 +1,29 @@
+ {% if request.user.is_authenticated %}
+<h1>
+<a href="{% url 'logout' %}">Вы уже авторизованны.
+    Выйти?</a>
+</h1>
+
+{% else %}
+
+    {% load crispy_forms_tags %}
+    {% block content %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Регистрация</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Уже есть аккаунт?
+                    <a href="users/login">Вход</a>
+                </small>
+            </div>
+        </div>
+    {% endblock content %}
+{% endif %}
